@@ -105,15 +105,15 @@ if uploaded_file is not None:
                 jenis_sampah = nama_material.get(label, label.capitalize())
 
                 if label in recycle_classes:
-                    status = "Sampah ini **dapat didaur ulang**."
+                    status = "Sampah ini dapat didaur ulang."
                 elif label in organic_classes:
-                    status = "Sampah ini adalah **organik** (tidak dapat didaur ulang industri)."
+                    status = "Sampah ini adalah organik (tidak dapat didaur ulang)."
                 elif label in non_recyclable:
-                    status = "Sampah ini **tidak dapat didaur ulang**."
+                    status = "Sampah ini tidak dapat didaur ulang."
                 else:
                     status = "Kategori sampah tidak diketahui."
 
-                kategori = f"Termasuk Sampah: **{jenis_sampah}**"
+                kategori = f"Termasuk Sampah: {jenis_sampah}"
 
                 st.markdown(f"""
                 <div style="
