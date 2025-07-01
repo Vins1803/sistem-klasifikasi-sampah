@@ -6,6 +6,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.vgg16 import preprocess_input
 
+st.write("Streamlit version:", st.__version__)
+
 # ================================
 # Fungsi set background
 # ================================
@@ -77,7 +79,7 @@ if uploaded_file is not None:
         st.warning(f"Ukuran file {file_size_mb:.2f} MB melebihi batas maksimum 5 MB.")
     else:
         img = Image.open(uploaded_file)
-        st.image(img, caption='Gambar yang Diupload', use_container_width=True)
+        st.image(image, width=None)
 
         if st.button('Prediksi'):
             try:
