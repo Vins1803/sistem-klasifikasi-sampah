@@ -1,6 +1,5 @@
 streamlit==1.26.0
-tensorflow==2.13
+tensorflow==2.13.0
 keras==2.10.0
-protobuf==3.19.6
 numpy
 Pillow
