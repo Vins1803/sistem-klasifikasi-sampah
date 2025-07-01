@@ -5,6 +5,7 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.vgg16 import preprocess_input
+import os
 
 st.write("Streamlit version:", st.__version__)
 
@@ -29,7 +30,17 @@ set_background("https://d39wptbp5at4nd.cloudfront.net/media/5889_original_600_Ba
 # ================================
 # Load model dan class labels
 # ================================
-model = load_model('vgg16_reexported.keras')
+model_path = 'vgg16_reexported.keras'
+
+if not os.path.exists(model_path):
+    st.error(f"Model tidak ditemukan: `{model_path}`. Pastikan file tersedia di direktori aplikasi.")
+    st.stop()
+
+try:
+    model = load_model(model_path)
+except Exception as e:
+    st.error(f"Gagal memuat model: {e}")
+    st.stop()
 
 try:
     with open("class_labels.json", "r") as f:
@@ -79,7 +90,7 @@ if uploaded_file is not None:
         st.warning(f"Ukuran file {file_size_mb:.2f} MB melebihi batas maksimum 5 MB.")
     else:
         img = Image.open(uploaded_file)
-        st.image(image, width=None)
+        st.image(img, caption="Gambar yang diunggah", use_column_width=True)
 
         if st.button('Prediksi'):
             try:
@@ -94,15 +105,15 @@ if uploaded_file is not None:
                 jenis_sampah = nama_material.get(label, label.capitalize())
 
                 if label in recycle_classes:
-                    status = "Sampah ini adalah sampah yang dapat didaur ulang."
+                    status = "Sampah ini **dapat didaur ulang**."
                 elif label in organic_classes:
-                    status = "Sampah ini adalah sampah organik (tidak dapat didaur ulang industri)."
+                    status = "Sampah ini adalah **organik** (tidak dapat didaur ulang industri)."
                 elif label in non_recyclable:
-                    status = "Sampah ini tidak dapat didaur ulang."
+                    status = "Sampah ini **tidak dapat didaur ulang**."
                 else:
                     status = "Kategori sampah tidak diketahui."
 
-                kategori = f"Termasuk Sampah: {jenis_sampah}"
+                kategori = f"Termasuk Sampah: **{jenis_sampah}**"
 
                 st.markdown(f"""
                 <div style="
