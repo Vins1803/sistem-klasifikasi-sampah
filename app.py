@@ -27,7 +27,7 @@ set_background("https://d39wptbp5at4nd.cloudfront.net/media/5889_original_600_Ba
 # ================================
 # Load model dan class labels
 # ================================
-model = load_model('vgg16_garbage_model.keras')
+model = load_model('vgg16_garbage_model_v2.keras')
 
 try:
     with open("class_labels.json", "r") as f:
