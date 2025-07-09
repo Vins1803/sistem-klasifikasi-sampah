@@ -78,11 +78,22 @@ nama_material = {
 # ================================
 # UI Streamlit
 # ================================
-st.title("Klasifikasi Sampah Daur Ulang")
-st.write("Upload gambar sampah, dan sistem akan memprediksi jenis dan kategorinya.")
+st.markdown(f"""
+    <div style="
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        color: #000000;
+        font-size: 18px;
+        margin-bottom: 20px;
+    ">
+        <h1 style="font-size: 32px;">Klasifikasi Sampah Daur Ulang</h1>
+        <p>Upload gambar sampah, dan sistem akan memprediksi jenis dan kategorinya.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader("Pilih gambar (maks 5 MB)...", type=["jpg", "jpeg", "png"])
-
 if uploaded_file is not None:
     file_size_mb = uploaded_file.size / (1024 * 1024)
 
